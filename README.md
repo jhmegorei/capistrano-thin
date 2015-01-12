@@ -10,6 +10,8 @@ deploy:stop
 
 Note: A valid Thin config file is expected under
 `config/thin/(production|staging|whatever).yml`.
+If no file is found, a message will be displayed
+in console and no action concerning thin is taken.
 
 ## Installation
 

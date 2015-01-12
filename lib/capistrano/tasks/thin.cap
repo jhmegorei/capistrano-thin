@@ -5,7 +5,11 @@ namespace :deploy do
     task command do
       on roles(:app), in: :sequence, wait: 5 do
         within current_path do
-          execute :bundle, "exec thin #{command} -C config/thin/#{fetch(:stage)}.yml"
+          if File.exist?("config/thin/#{fetch(:stage)}.yml")
+            execute :bundle, "exec thin #{command} -C config/thin/#{fetch(:stage)}.yml"
+          else
+            puts "No thin configuration file found for #{fetch(:stage)} environment found - no action taken"
+          end
         end
       end
     end
